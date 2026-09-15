@@ -1,18 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
-
-  const toggle = document.querySelector(".nav-toggle");
-  const menu = document.querySelector("#nav-menu");
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      const open = menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = open ? "Close" : "Menu";
-    });
-    menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
-      menu.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.textContent = "Menu";
-    }));
-  }
-});
+document.querySelectorAll('[data-menu]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelector('.links').classList.toggle('open')}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>document.querySelector('.links')?.classList.remove('open')));
+const form=document.querySelector('[data-contact-form]');
+if(form){form.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(form);const subject=encodeURIComponent('Fore website enquiry — '+(data.get('audience')||'General'));let body='Name: '+data.get('name')+'\nEmail: '+data.get('email')+'\nOrganisation: '+(data.get('org')||'')+'\nAudience: '+data.get('audience')+'\n\n'+data.get('message');window.location.href='mailto:hello@foresports.in?subject='+subject+'&body='+encodeURIComponent(body);});}
